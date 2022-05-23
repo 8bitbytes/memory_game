@@ -13,7 +13,6 @@ class Card
         @cardCenterFaceUp = "│ " + @cardFaceValue + " │"
         @cardBottom = "╰────╯"
         @currentCardFace = @faceUp ? @cardCenterFaceUp : @cardCenterFaceDown
-        #print_card
     end
 
 
