@@ -1,6 +1,7 @@
 require './card'
+
 class Deck
-    attr_accessor :cards
+    attr_accessor :cards, :playeroneTotalMatches, :playertwoTotalMatches
 
   
     def initialize(deck_size = 12)
@@ -13,6 +14,10 @@ class Deck
         @cardValues = ["🦊","🦔","🦄","🦥","🦦","🐄"]
         #@cardValues = ["☢","🦔","🦄","😈","🐧","🐄"]
         @faceValueDown = "💎"
+        @playeroneMatchPositions =[]
+        @playertwoMatchPositions =[]
+        @playeroneTotalMatches =0
+        @playertwoTotalMatches =0
 
         i = 0;
         iterations = deck_size / 2
@@ -26,6 +31,26 @@ class Deck
         cards.shuffle!
     end
     
+    def assignMatchToPlayer(card1Pos, card2Pos, playerNum)
+        if playerNum == 1
+            @playeroneMatchPositions.append(card1Pos)
+            @playeroneMatchPositions.append(card2Pos)
+            @playeroneTotalMatches +=1
+        else
+            @playertwoMatchPositions.append(card1Pos)
+            @playertwoMatchPositions.append(card2Pos)
+            @playertwoTotalMatches +=1
+        end
+    end
+
+    def whichPlayerHasMostMatches()
+        if playeroneTotalMatches == playertwoTotalMatches
+            return 3
+        end    
+        
+        playeroneTotalMatches > playertwoTotalMatches ? 1 : 2
+    end    
+
     def display(rows = 4, cols = 3 )
         gridSpace = "   "
         i = 0
@@ -33,41 +58,41 @@ class Deck
         row_start = 0
         rCount = rows - 1
 
-        for z in 0..cols -1 do
-            for i in 0..rCount
+        for z in 0...cols do
+            for i in 0...rows
                 print @cards[row_start + i].cardTop + gridSpace
             end
 
             print "\n"
 
-            for i in 0..rCount
+            for i in 0...rows
                 print @cards[row_start + i].cardFillLine + gridSpace
             end
 
             print "\n"
 
 
-            for i in 0..rCount
+            for i in 0...rows
                 print @cards[row_start + i].currentCardFace + gridSpace
             end
 
             print "\n"
 
 
-            for i in 0..rCount
+            for i in 0...rows
                 print @cards[row_start + i].cardFillLine + gridSpace
             end
 
             print "\n"
 
 
-            for i in 0..rCount
+            for i in 0...rows
                 print @cards[row_start + i].cardBottom + gridSpace
             end
 
             print "\n"
             
-            for i in 0..rCount
+            for i in 0...rows
                 card_number = row_start + i + 1
                 print card_number.to_s + "         "
             end
