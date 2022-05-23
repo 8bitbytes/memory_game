@@ -4,6 +4,9 @@ Ruby console memory game
 
 I am in the process of learning ruby so I made this small game to learn about I/O conditional statements and looping
 
+## Executing the game
+ruby game.rb
+
 ## Overview
 
 This game allows 1 or 2 players to compete in the memory game. Players match a card. The Player with the most matches wins.
